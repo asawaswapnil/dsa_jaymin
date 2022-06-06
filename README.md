@@ -36,7 +36,7 @@ Simple Python implementations of commonly used data structures and algorithms
     - Find cycles in an undirected graph using recursive depth-first search 
       - `find_cycles_undirected_dfs`
     - Find cycles in a directed graph using recursive depth-first search 
-      - `find_cycles_undirected_dfs`
+      - `find_cycles_directed_dfs`
   - [Connected Components](graph/connected_components.py)
     - Find number of connected components in a graph using depth-first search 
       - `conn_comps_using_dfs`
