@@ -82,7 +82,7 @@ class DisjointSetUnion:
         self._sizes[rep1] += self._sizes[rep2]
         self._largest_disjoint_set_size = max(self._largest_disjoint_set_size, self._sizes[rep1])
 
-    def get_union_method(self):
+    def get_union_method(self) -> UnionMethod:
         """
         Returns the union method being used by the data structure
         """
