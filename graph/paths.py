@@ -5,8 +5,7 @@ from graph import SampleGraphs, print_graph
 
 def dfs_paths(graph: Dict[str, Set], start: str, goal: str) -> Optional[List]:
     """
-    Find path from start node to goal node using DFS
-    Works for all types of graphs {directed, undirected, cyclic, acyclic}
+    Find path from start node to goal node using DFS - works for all types of graphs {directed, undirected, cyclic, acyclic}
     """
     visited = set()
     stack = [(start, [start])]  # stack entries are of the form: Tuple(node, path_so_far)
@@ -24,8 +23,7 @@ def dfs_paths(graph: Dict[str, Set], start: str, goal: str) -> Optional[List]:
 
 def bfs_paths(graph: Dict[str, Set], start: str, goal: str) -> Optional[List]:
     """
-    Find path from start node to goal node using DFS
-    Works for all types of graphs {directed, undirected, cyclic, acyclic}
+    Find path from start node to goal node using BFS - works for all types of graphs {directed, undirected, cyclic, acyclic}
     """
     visited = set()
     queue = deque([(start, [start])])  # queue entries are of the form: Tuple(node, path_so_far)
@@ -36,6 +34,25 @@ def bfs_paths(graph: Dict[str, Set], start: str, goal: str) -> Optional[List]:
             if nbr == goal:
                 return path + [nbr]
             else:
+                queue.append((nbr, path + [nbr]))
+    print("Path from start node: '{}' to goal node: '{}' not found in graph".format(start, goal))
+    return None
+
+
+def bfs_paths_optimized(graph: Dict[str, Set], start: str, goal: str) -> Optional[List]:
+    """
+    Find path from start node to goal node using BFS - works for all types of graphs {directed, undirected, cyclic, acyclic}
+    Refer description for optimized BFS for more details on why this implementation is optimized
+    """
+    visited = {start}
+    queue = deque([(start, [start])])  # queue entries are of the form: Tuple(node, path_so_far)
+    while queue:
+        node, path = queue.popleft()
+        for nbr in graph[node] - visited:
+            if nbr == goal:
+                return path + [nbr]
+            else:
+                visited.add(nbr)
                 queue.append((nbr, path + [nbr]))
     print("Path from start node: '{}' to goal node: '{}' not found in graph".format(start, goal))
     return None
