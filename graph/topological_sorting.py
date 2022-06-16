@@ -17,6 +17,7 @@ def top_sort_dfs(graph: Dict[str, Set]) -> Optional[List]:
         markers[node] = 1
         for nbr in graph[node]:
             if markers[nbr] == 1:
+                # we are throwing exception just for the purpose of simplicity, refer `_top_sort_dfs_no_exception`
                 raise CycleFoundError("Graph is cyclic, topological sort not possible!")
             if markers[nbr] == 0:
                 _top_sort(graph, nbr, markers, top_stack)
@@ -31,6 +32,45 @@ def top_sort_dfs(graph: Dict[str, Set]) -> Optional[List]:
                 _top_sort(graph, node, markers, top_stack)
             except CycleFoundError as ce:
                 print(ce)
+                return None
+    return list(reversed(top_stack))
+
+
+def _top_sort_dfs_no_exception(graph: Dict[str, Set]) -> Optional[List]:
+    """
+    An improved version of `dfs_top_sort` that does not throw an exception but uses return values to indicate the
+    presence of a cycle. Throwing exception is costly and should not be used to break out of recursive loops:
+    - Efficiency: throwing exceptions in general is slower; populating stack traces; looking for different except
+        clauses to execute; finding a finally block and performing any cleanups if context managers are used which
+        still required walking the call stack
+    - Usability: throwing an exception to abort the recursive chain means whoever calls your function needs to write
+        code that reacts to that exception. This means that instead of doing something like writing if (myCall()) {...},
+        they need to have separate branches, one for where the call returns a value normally and one for the case where
+        it throws.
+    - Clarity: exceptions are supposed to be used for situations that are exceptional! The exception mechanism is
+        designed to report back information in cases where there's simply no feasible way to return a value. Repurposing
+        the exception system to handle regular control flow makes the code harder to read and maintain, and
+        violates the "Principle of Least Surprise".
+    More details on - https://stackoverflow.com/questions/55435804/is-throwing-exception-to-forcefully-coming-out-of-recursion-efficient
+    """
+    def _top_sort(graph, node, markers, top_stack):
+        markers[node] = 1
+        for nbr in graph[node]:
+            if markers[nbr] == 1:
+                return False
+            if markers[nbr] == 0:
+                if not _top_sort(graph, nbr, markers, top_stack):
+                    return False
+        markers[node] = 2
+        top_stack.append(node)
+        return True
+
+    markers = dict.fromkeys(graph, 0)
+    top_stack = []
+    for node in graph.keys():
+        if markers[node] == 0:
+            if not _top_sort(graph, node, markers, top_stack):
+                print("Graph is cyclic, topological sort not possible!")
                 return None
     return list(reversed(top_stack))
 
