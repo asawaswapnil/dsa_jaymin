@@ -1,6 +1,6 @@
 from typing import Dict, Set
 
-from graph import SampleGraphs, print_graph
+from graph import SampleGraphs, Markers, print_graph
 from unionfind import DisjointSetUnion
 
 
@@ -70,18 +70,19 @@ def find_cycles_directed_dfs(graph: Dict[str, Set]) -> bool:
     Check if a cycle exists in a directed graph using DFS and visit markers method
     """
     def _dfs(graph, node, markers):
-        markers[node] = 1
+        markers[node] = Markers.BEING_VISITED
         for nbr in graph[node]:
-            if markers[nbr] == 1:
+            if markers[nbr] == Markers.BEING_VISITED:
                 return True  # cycle found
-            if _dfs(graph, nbr, markers):
-                return True
-        markers[node] = 2
+            if markers[nbr] == Markers.NOT_VISITED:
+                if _dfs(graph, nbr, markers):
+                    return True
+        markers[node] = Markers.VISITED
         return False  # all neighbors visited, no cycle found so far
 
-    markers = dict.fromkeys(graph, 0)
+    markers = dict.fromkeys(graph, Markers.NOT_VISITED)
     for node in graph:
-        if markers[node] == 0:
+        if markers[node] == Markers.NOT_VISITED:
             if _dfs(graph, node, markers):
                 return True
     return False

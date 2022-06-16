@@ -2,32 +2,32 @@ import copy
 from collections import deque
 from typing import Dict, Set, List, Optional
 
-from graph import SampleGraphs, CycleFoundError, print_graph
+from graph import SampleGraphs, Markers, CycleFoundError, print_graph
 
 
 def top_sort_dfs(graph: Dict[str, Set]) -> Optional[List]:
     """
     Using DFS and visit tracking markers/flags
-    0 => node not visited
-    1 => node is currently being visited (traversing through the neighbors)
-    2 => node visited
+    0 (Markers.NOT_VISITED) => node not visited
+    1 (Markers.BEING_VISITED) => node is currently being visited (traversing through the neighbors)
+    2 (Markers.VISITED) => node visited
     Topological sorting can only be found for directed acyclic graphs
     """
     def _top_sort(graph, node, markers, top_stack):
-        markers[node] = 1
+        markers[node] = Markers.BEING_VISITED
         for nbr in graph[node]:
-            if markers[nbr] == 1:
+            if markers[nbr] == Markers.BEING_VISITED:
                 # we are throwing exception just for the purpose of simplicity, refer `_top_sort_dfs_no_exception`
                 raise CycleFoundError("Graph is cyclic, topological sort not possible!")
-            if markers[nbr] == 0:
+            if markers[nbr] == Markers.NOT_VISITED:
                 _top_sort(graph, nbr, markers, top_stack)
-        markers[node] = 2
+        markers[node] = Markers.VISITED
         top_stack.append(node)
 
-    markers = dict.fromkeys(graph, 0)
+    markers = dict.fromkeys(graph, Markers.NOT_VISITED)
     top_stack = []
     for node in graph.keys():
-        if markers[node] == 0:
+        if markers[node] == Markers.NOT_VISITED:
             try:
                 _top_sort(graph, node, markers, top_stack)
             except CycleFoundError as ce:
@@ -54,14 +54,14 @@ def _top_sort_dfs_no_exception(graph: Dict[str, Set]) -> Optional[List]:
     More details on - https://stackoverflow.com/questions/55435804/is-throwing-exception-to-forcefully-coming-out-of-recursion-efficient
     """
     def _top_sort(graph, node, markers, top_stack):
-        markers[node] = 1
+        markers[node] = Markers.BEING_VISITED
         for nbr in graph[node]:
-            if markers[nbr] == 1:
+            if markers[nbr] == Markers.BEING_VISITED:
                 return False
-            if markers[nbr] == 0:
+            if markers[nbr] == Markers.NOT_VISITED:
                 if not _top_sort(graph, nbr, markers, top_stack):
                     return False
-        markers[node] = 2
+        markers[node] = Markers.VISITED
         top_stack.append(node)
         return True
 

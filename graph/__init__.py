@@ -1,3 +1,4 @@
+from enum import Enum
 from pprint import pprint
 from typing import Dict, Set, Union
 
@@ -7,6 +8,12 @@ import matplotlib.pyplot as plt
 
 class CycleFoundError(Exception):
     pass
+
+
+class Markers(Enum):
+    NOT_VISITED = 0  # node not visited
+    BEING_VISITED = 1  # node is currently being visited (traversing through the neighbors)
+    VISITED = 2  # node visited
 
 
 class Graph:
