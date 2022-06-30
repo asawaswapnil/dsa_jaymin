@@ -38,9 +38,11 @@ class DisjointSetUnion:
             if e not in self._representatives:
                 element_added = True
                 self._representatives[e] = e
-                self._ranks[e] = 0
-                self._sizes[e] = 1
                 self._disjoint_set_count += 1
+                if self._union_method == UnionMethod.BY_SIZE:
+                    self._sizes[e] = 1
+                else:
+                    self._ranks[e] = 0
         if element_added:
             self._largest_disjoint_set_size = max(self._largest_disjoint_set_size, 1)
 
@@ -109,13 +111,21 @@ class DisjointSetUnion:
         return self._largest_disjoint_set_size
 
     def __str__(self):
-        return "DisjointSetUnion@{}: {}\n-> Representatives: {}\n-> Total disjoint set count: {}\n-> Size of the largest disjoint set: {}".format(
-            id(self),
-            self.get_union_method(),
-            list(self.get_representatives().values()),
-            self.get_disjoint_set_count(),
-            self.get_largest_disjoint_set_size()
-        )
+        if self._union_method == UnionMethod.BY_SIZE:
+            return "DisjointSetUnion@{}: {}\n-> Representatives: {}\n-> Total disjoint set count: {}\n-> Size of the largest disjoint set: {}".format(
+                id(self),
+                self.get_union_method(),
+                list(self.get_representatives().values()),
+                self.get_disjoint_set_count(),
+                self.get_largest_disjoint_set_size()
+            )
+        else:
+            return "DisjointSetUnion@{}: {}\n-> Representatives: {}\n-> Total disjoint set count: {}".format(
+                id(self),
+                self.get_union_method(),
+                list(self.get_representatives().values()),
+                self.get_disjoint_set_count()
+            )
 
 
 if __name__ == '__main__':
