@@ -1,4 +1,5 @@
 from typing import Dict, Tuple
+from functools import lru_cache
 
 
 def grid_traveller(m: int, n: int) -> int:
@@ -14,9 +15,25 @@ def grid_traveller(m: int, n: int) -> int:
     return grid_traveller(m-1, n) + grid_traveller(m, n-1)
 
 
+@lru_cache(maxsize=None)
+def grid_traveller_cached(m: int, n: int) -> int:
+    """
+    Memoized solution with built-in Python cache – time = num of nodes in the optimized tree, space = height of tree
+    If the arguments of the recursive function are hashable, a simple lru_cache can be used to cache function calls
+    Setting maxsize as None disables all LRU features making it a simple memo/cache
+    Time: O(m x n)
+    Space: O(m + n)
+    """
+    if m == 0 or n == 0:
+        return 0
+    if m == 1 and n == 1:
+        return 1
+    return grid_traveller_cached(m-1, n) + grid_traveller_cached(m, n-1)
+
+
 def grid_traveller_memo(m: int, n: int, memo: Dict[Tuple, int]) -> int:
     """
-    Memoized solution – time = num of nodes in the optimized tree, space = height of tree
+    Memoized solution with a dictionary – time = num of nodes in the optimized tree, space = height of tree
     Time: O(m x n)
     Space: O(m + n)
     """

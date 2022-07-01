@@ -1,4 +1,5 @@
 from typing import Dict
+from functools import lru_cache
 
 
 def fib(n: int) -> int:
@@ -12,9 +13,23 @@ def fib(n: int) -> int:
     return fib(n-2) + fib(n-1)
 
 
+@lru_cache(maxsize=None)
+def fib_cached(n: int) -> int:
+    """
+    Memoized solution with built-in Python cache – time = num of nodes in the optimized tree, space = height of tree
+    If the arguments of the recursive function are hashable, a simple lru_cache can be used to cache function calls
+    Setting maxsize as None disables all LRU features making it a simple memo/cache
+    Time: O(n)
+    Space: O(n)
+    """
+    if n <= 2:
+        return 1
+    return fib_cached(n-2) + fib_cached(n-1)
+
+
 def fib_memo(n: int, memo: Dict[int, int]) -> int:
     """
-    Memoized solution – time = num of nodes in the optimized tree, space = height of tree
+    Memoized solution with a dictionary – time = num of nodes in the optimized tree, space = height of tree
     Time: O(n)
     Space: O(n)
     """
