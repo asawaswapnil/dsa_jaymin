@@ -43,6 +43,9 @@ Python implementations and examples of commonly used data structures and algorit
 - [Union-Find](unionfind/__init__.py)
   - Implementation of the data structure with union-by-rank and union-by-size
 - [Trees](tree)
+- [Linear Data Structures](linear)
+  - [Ring Buffer](linear/ring_buffer)
+    - [Basic](linear/ring_buffer/ring_buffer_basic.py) (illustrative) and [optimized](linear/ring_buffer/ring_buffer_optimized.py) implementations of ring buffer (also called circular buffer or circular queue)
 - [Dynamic Programming](dp)
   - Python implementations of problems from [Coderbyte DP series](https://www.youtube.com/watch?v=oBt53YbR9Kk)
   - [Memoization](dp/memoization)
