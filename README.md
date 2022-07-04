@@ -41,12 +41,17 @@ Python implementations and examples of commonly used data structures and algorit
     - Check if an undirected graph is a valid tree using depth-first search
     - Check if a directed graph is a valid tree using depth-first search
 - [Union-Find](unionfind/__init__.py)
-  - Implementation of the data structure with union-by-rank and union-by-size
+  - Implementation of the Disjoint Set Union data structure with union-by-rank and union-by-size
 - [Trees](tree)
+- [Heap](heap)
 - [Linear Data Structures](linear)
   - [Ring Buffer](linear/ring_buffer)
     - [Basic](linear/ring_buffer/ring_buffer_basic.py) (illustrative) and [optimized](linear/ring_buffer/ring_buffer_optimized.py) implementations of ring buffer (also called circular buffer or circular queue)
+- [Sorting](sorting)
 - [Dynamic Programming](dp)
   - Python implementations of problems from [Coderbyte DP series](https://www.youtube.com/watch?v=oBt53YbR9Kk)
   - [Memoization](dp/memoization)
   - [Tabulation](dp/tabulation)
+- [Miscellaneous](misc)
+  - [ID Allocator](misc/id_allocator.py)
+    - An efficient version of an ID allocator using a Binary Heap
