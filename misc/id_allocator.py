@@ -33,6 +33,9 @@ class IdAllocator:
         return self._max_val
 
     def allocate(self) -> int:
+        """
+        Allocated and return an ID if there is one available otherwise raise an Exception
+        """
         idx = 0
         if self._heap_bitset[idx]:
             raise Exception("No IDs available!")
@@ -54,6 +57,9 @@ class IdAllocator:
         return id_value
 
     def release(self, id_value: int) -> None:
+        """
+        Release an allocated ID if the ID is valid otherwise raise an Exception
+        """
         if not 0 <= id_value < self.max_value:
             raise Exception("The ID '{}' cannot be released, invalid ID".format(id_value))
 
@@ -80,19 +86,63 @@ class IdAllocator:
             idx = parent
         self._heap_bitset[0] = self._heap_bitset[1] and self._heap_bitset[2]
 
+    def __str__(self):
+        return "IdAllocator[{}]@{}\n-> Heap: {}\n-> Available: {}".format(
+            self.max_value,
+            id(self),
+            self._heap_bitset,
+            [self.get_id_value_from_id_position(_pos) for _pos in range(self.max_value, 2 * self.max_value) if not self._heap_bitset[_pos]]
+        )
+
 
 if __name__ == '__main__':
     ida = IdAllocator(max_val=5)
+    print(ida)
+
+    print("\nAllocate")
     print(ida.allocate())
+    print(ida)
+
+    print("\nAllocate")
     print(ida.allocate())
+    print(ida)
+
+    print("\nAllocate")
     print(ida.allocate())
+    print(ida)
+
+    print("\nAllocate")
     print(ida.allocate())
+    print(ida)
+
+    print("\nAllocate")
     print(ida.allocate())
+    print(ida)
+
+    print("\nRelease '4'")
     ida.release(4)
+    print(ida)
+
+    print("\nAllocate")
     print(ida.allocate())
+    print(ida)
+
+    print("\nRelease '4'")
     ida.release(4)
+    print(ida)
+
+    print("\nAllocate")
     print(ida.allocate())
-    ida.release(4)
-    print(ida.allocate())
+    print(ida)
+
+    print("\nRelease '3'")
     ida.release(3)
+    print(ida)
+
+    print("\nAllocate")
     print(ida.allocate())
+    print(ida)
+
+    print("\nRelease '0'")
+    ida.release(0)
+    print(ida)

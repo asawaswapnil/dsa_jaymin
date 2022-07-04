@@ -42,17 +42,31 @@ class RingBufferOptimized(RingBuffer[T]):
 if __name__ == '__main__':
     rb = RingBufferOptimized[str](4)
     print(rb)
+
+    print("\nPut 'A'")
     rb.put("A")
     print(rb)
+
+    print("\nPut 'B'")
     rb.put("B")
     print(rb)
+
+    print("\nPut 'C'")
     rb.put("C")
     print(rb)
+
+    print("\nPut 'D'")
     rb.put("D")
     print(rb)
+
+    print("\nPut 'E'")
     rb.put("E")
     print(rb)
+
+    print("\nPut 'F'")
     rb.put("F")
     print(rb)
+
+    print("\nGet")
     print(rb.get())  # should be "C"
     print(rb)
