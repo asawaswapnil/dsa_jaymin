@@ -50,6 +50,10 @@ Python implementations and examples of commonly used data structures and algorit
     - Recursive inorder, preorder and postorder traversals
     - Iterative inorder, preorder and postorder traversals
     - Iterative levelorder and levelorder grouped traversals
+  - [Trie](tree/trie.py)
+    - A basic implementation of Trie (Prefix Tree) using a Hashmap
+  - [ParseTree](tree/parse_tree.py)
+    - An implementation of a Parse Tree to evaluate simple mathematical expressions
 - [Linear Data Structures](linear)
   - [Ring Buffer](linear/ring_buffer)
     - [Basic](linear/ring_buffer/ring_buffer_basic.py) (illustrative) and [optimized](linear/ring_buffer/ring_buffer_optimized.py) implementations of ring buffer (also called circular buffer or circular queue)
