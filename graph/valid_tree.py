@@ -8,7 +8,7 @@ An undirected graph can only be a valid tree if graph is connected (only one con
 Check the following conditions:
     1. Total number of edges = number of vertices - 1
         - If number of edges < number of vertices - 1 => graph is disconnected
-        - If number of edges > number of vertices => graph has a cycle
+        - If number of edges > number of vertices - 1 => graph has a cycle
     2. All nodes in the graph must be visited in a single-pass DFS started from any node in the graph
 If for some reason information regarding number of edges is not available, a DFS can be used to detect cycles in graph
 
