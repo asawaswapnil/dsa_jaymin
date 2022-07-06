@@ -4,7 +4,7 @@ from typing import Dict, Set
 from graph import SampleGraphs, print_graph
 
 """
-An undirected graph can only be a valid tree if graph is fully connected and it has no cycles. 
+An undirected graph can only be a valid tree if graph is connected (only one connected component) and it has no cycles. 
 Check the following conditions:
     1. Total number of edges = number of vertices - 1
         - If number of edges < number of vertices => graph is disconnected
