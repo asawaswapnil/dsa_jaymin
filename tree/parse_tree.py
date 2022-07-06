@@ -27,9 +27,9 @@ class ParseTree:
         self._root: TreeNode = TreeNode()
         self._construct_tree()
 
-    def _construct_tree(self):
+    def _construct_tree(self) -> None:
         """
-        Construct the Parse Tree from given expression string
+        Construct the Parse Tree from the underlying expression string
         """
         curr = self._root
         stack = [curr]
