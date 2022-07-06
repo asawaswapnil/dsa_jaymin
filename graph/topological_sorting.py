@@ -65,7 +65,7 @@ def _top_sort_dfs_no_exception(graph: Dict[str, Set]) -> Optional[List]:
         top_stack.append(node)
         return True
 
-    markers = dict.fromkeys(graph, 0)
+    markers = dict.fromkeys(graph, Markers.NOT_VISITED)
     top_stack = []
     for node in graph.keys():
         if markers[node] == Markers.NOT_VISITED:
