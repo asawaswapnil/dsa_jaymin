@@ -151,7 +151,7 @@ def level_order_grouped(node: TreeNode, func: Callable) -> None:
 
 if __name__ == '__main__':
     tree = SampleTrees.full_binary_tree()
-    root, metadata = tree.root, tree.metadata
+    root, metadata = tree._root, tree.metadata
 
     print("\nVisual Structure")
     print(metadata.get(VISUAL_STRUCTURE))
