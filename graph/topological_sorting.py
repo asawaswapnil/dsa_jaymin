@@ -68,7 +68,7 @@ def _top_sort_dfs_no_exception(graph: Dict[str, Set]) -> Optional[List]:
     markers = dict.fromkeys(graph, 0)
     top_stack = []
     for node in graph.keys():
-        if markers[node] == 0:
+        if markers[node] == Markers.NOT_VISITED:
             if not _top_sort(graph, node, markers, top_stack):
                 print("Graph is cyclic, topological sort not possible!")
                 return None
