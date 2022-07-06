@@ -8,7 +8,7 @@ class RingBufferBasic(RingBuffer[T]):
     A basic implementation of a Ring Buffer, also called as a Circular Buffer or a Circular Queue using Python List.
     All operations are O(1) except for the initialization which take O(n). This can be improved to using just one
     pointer and appending to the list but since this is just for illustrative purpose, it is kept as-is.
-    There is a more optimized version that use a Deque, check out `RingBufferOptimized` below
+    There is a more optimized version that uses a Deque, check out `RingBufferOptimized`
 
     Reference: https://en.wikipedia.org/wiki/Circular_buffer
     """
@@ -36,6 +36,8 @@ class RingBufferBasic(RingBuffer[T]):
         Get/remove/dequeue the oldest item from the ring buffer
         """
         if self._size == self._capacity:
+            # tail always points to the next index of insertion
+            # in case of a full buffer, most updated tail is where the head should be
             self._head = self._tail
         item = self._buffer[self._head]
         self._buffer[self._head] = None

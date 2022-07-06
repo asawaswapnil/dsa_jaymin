@@ -43,7 +43,13 @@ Python implementations and examples of commonly used data structures and algorit
 - [Union-Find](unionfind/__init__.py)
   - Implementation of the Disjoint Set Union data structure with union-by-rank and union-by-size
 - [Trees](tree)
-- [Heap](heap)
+  - [Utility Methods](tree/__init__.py)
+  - [Sample Trees](tree/__init__.py)
+    - Sample trees used for examples with their visual structure (`SampleTrees`)
+  - [Traversals](tree/traversals.py)
+    - Recursive inorder, preorder and postorder traversals
+    - Iterative inorder, preorder and postorder traversals
+    - Iterative levelorder and levelorder grouped traversals
 - [Linear Data Structures](linear)
   - [Ring Buffer](linear/ring_buffer)
     - [Basic](linear/ring_buffer/ring_buffer_basic.py) (illustrative) and [optimized](linear/ring_buffer/ring_buffer_optimized.py) implementations of ring buffer (also called circular buffer or circular queue)
