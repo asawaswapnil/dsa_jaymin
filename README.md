@@ -65,3 +65,6 @@ Python implementations and examples of commonly used data structures and algorit
 - [Miscellaneous](misc)
   - [ID Allocator](misc/id_allocator.py)
     - An efficient version of an ID allocator using a Binary Heap
+  - [Hit Counter](misc/hit_counter.py)
+    - An implementation of a hit counter that keeps track of number of requests for different methods of a key-value store
+    in past `n` seconds.
