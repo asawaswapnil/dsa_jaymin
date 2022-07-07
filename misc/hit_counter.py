@@ -67,7 +67,7 @@ class HitCounter:
     in past `duration_secs` seconds. The key-value store being used here is `KVStore` which is a toy implementation of
     an in-memory key-value store like Memcached or Redis.
 
-    It maintains a fixed size buffers (`deque` or a doubly-ended queue) for all operations. The idea is to always keep
+    It maintains fixed size buffers (`deque` or a doubly-ended queue) for all operations. The idea is to always keep
     the buffers in a valid state. Valid state here means there are no stale entries (hits for requests older than
     `duration_secs`). So every time we try to record a hit or compute QPS, we first update the buffers to be in a
     consistent/valid state.
@@ -112,7 +112,7 @@ class HitCounter:
             return 0
 
         total_hits = 0
-        total_secs = queue[self.TAIL].end_time - queue[self.HEAD].start_time
+        total_secs = current_time - queue[self.HEAD].start_time or 1
         for window in queue:
             total_hits += window.hits
         return total_hits // total_secs
@@ -127,7 +127,8 @@ class HitCounter:
             queue.clear()  # All time windows in the queue are stale
             return
 
-        while queue and queue[self.HEAD].end_time < oldest_allowed_time:
+        # Start removing stale time windows from the left to right (oldest -> newest)
+        while queue and queue[self.HEAD].end_time <= oldest_allowed_time:
             queue.popleft()
 
     @staticmethod
@@ -150,7 +151,13 @@ if __name__ == '__main__':
     print(kv_store.qps_load(KVStore.Operation.PUT))  # should be 3
     print(kv_store.qps_load(KVStore.Operation.GET))  # should be 1
 
-    time.sleep(DURATION_SECS + 1)
+    time.sleep(DURATION_SECS)
+
+    print(kv_store.qps_load(KVStore.Operation.PUT))  # should be 1
+    print(kv_store.qps_load(KVStore.Operation.GET))  # should be 0, the QPS value is rounded down to the nearest integer
+
+    kv_store.get("b")
+    time.sleep(1)
 
     print(kv_store.qps_load(KVStore.Operation.PUT))  # should be 0
-    print(kv_store.qps_load(KVStore.Operation.GET))  # should be 0
+    print(kv_store.qps_load(KVStore.Operation.GET))  # should be 1
