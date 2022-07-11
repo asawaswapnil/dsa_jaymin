@@ -4,7 +4,7 @@ Python implementations and examples of commonly used data structures and algorit
 
 ## Setup
 
-- Python 3.x
+- Python 3.7+
 - `pip install -r requirements.txt` (only required for visualizing graphs)
 
 ## Quick Links
@@ -54,7 +54,9 @@ Python implementations and examples of commonly used data structures and algorit
     - A basic implementation of Trie (Prefix Tree) using a Hashmap
   - [ParseTree](tree/parse_tree.py)
     - An implementation of a Parse Tree to evaluate simple mathematical expressions
-- [Linear Data Structures](linear)
+- [Linear DSA](linear)
+  - [Binary Search](linear/binary_search)
+    - A generalized Binary Search [template](linear/binary_search/README.md) and it's applications
   - [Ring Buffer](linear/ring_buffer)
     - [Basic](linear/ring_buffer/ring_buffer_basic.py) (illustrative) and [optimized](linear/ring_buffer/ring_buffer_optimized.py) implementations of ring buffer (also called circular buffer or circular queue)
 - [Sorting](sorting)
