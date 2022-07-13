@@ -65,8 +65,8 @@ Python implementations and examples of commonly used data structures and algorit
   - [Memoization](dp/memoization)
   - [Tabulation](dp/tabulation)
 - [Miscellaneous](misc)
-  - [ID Allocator](misc/id_allocator.py)
+  - [ID Allocator](misc/id_allocator)
     - An efficient version of an ID allocator using a Binary Heap
-  - [Hit Counter](misc/hit_counter.py)
+  - [Hit Counter](misc/hit_counter)
     - An implementation of a hit counter that keeps track of number of requests for different methods of a key-value store
     in past `n` seconds.
