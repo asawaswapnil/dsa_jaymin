@@ -15,7 +15,7 @@ def quick_select(array: List, selection: Selection, k: int) -> int:
     """
     first, last = 0, len(array) - 1
     if selection == Selection.SMALLEST:
-        k -= 1  # beacause indices start from 0
+        k -= 1  # array indices start from 0
         return _select_kth_smallest(array, first, last, k)
     else:
         k = len(array) - k  # kth largest is (n-k)th smallest
