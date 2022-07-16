@@ -6,7 +6,7 @@ def radix_sort(array: List, base: int) -> List:
     """
     Radix Sort (for decimal numbers)
     Time: O(maxd * n) => O(n); `maxd` is the number of digits in the largest number in array
-    Space: O(base + n) => O(10 + n) => O(n); where base is nthe base of the number system being used,
+    Space: O(base + n) => => O(n); where base is the base of the number system being used,
         2 for binary, 8 for octal, 16 for haxadecimal, 10 for decimal, etc.
     """
     max_digits = len(str(max(array)))
