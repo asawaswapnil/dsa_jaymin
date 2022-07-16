@@ -18,11 +18,14 @@ def quick_select(array: List, selection: Selection, k: int) -> int:
         k -= 1  # beacause indices start from 0
         return _select_kth_smallest(array, first, last, k)
     else:
-        k = len(array) - k  # kth largest is (n - k)th smallest
+        k = len(array) - k  # kth largest is (n-k)th smallest
         return _select_kth_smallest(array, first, last, k)
 
 
 def _select_kth_smallest(array: List, first: int, last: int, k: int) -> int:
+    """
+    Find kth smallest element from the array
+    """
     pivot_idx = _partition(array, first, last)
     if k < pivot_idx:
         return _select_kth_smallest(array, first, pivot_idx - 1, k)
@@ -32,8 +35,11 @@ def _select_kth_smallest(array: List, first: int, last: int, k: int) -> int:
         return array[pivot_idx]
 
 
-def _partition(array: List, first: int, last: int):
+def _partition(array: List, first: int, last: int) -> int:
     """
+    Partition the array and return the pivot index such that everything to the left of the partition (pivot) index is
+        less than or equal to the element at the pivot index and everything to the right is greated than the pivor index
+    Algorithm:
     - Take last (rightmost) element as pivot
     - Start with the first index as a potential pivot idx and try to find the correct index by iterating over the array
     - While iterating move all elements smaller than or equal to pivot to the left of the pivot and move pivot idx to
