@@ -64,6 +64,8 @@ Python implementations and examples of commonly used data structures and algorit
   - [Quick Sort](sorting/quick_sort.py)
   - [Counting Sort](sorting/counting_sort.py)
   - [Radix Sort](sorting/radix_sort.py)
+- [Selection](selection)
+  - [Quick Select](selection/quick_select.py)
 - [Dynamic Programming](dp)
   - Python implementations of problems from [Coderbyte DP series](https://www.youtube.com/watch?v=oBt53YbR9Kk)
   - [Memoization](dp/memoization)

@@ -13,23 +13,31 @@ def quick_sort(array: List) -> List:
 
 def _quick_sort(array: List, first: int, last: int) -> List:
     if first < last:
-        split = _partition(array, first, last)
-        _quick_sort(array, first, split - 1)
-        _quick_sort(array, split + 1, last)
+        pivot_idx = _partition(array, first, last)
+        _quick_sort(array, first, pivot_idx - 1)
+        _quick_sort(array, pivot_idx + 1, last)
     return array
 
 
 def _partition(array: List, first: int, last: int):
-    pivot, pivot_idx = array[first], first
-    while first <= last:
-        while first <= last and array[first] <= pivot:
-            first += 1
-        while first <= last and array[last] >= pivot:
-            last -= 1
-        if first <= last:
-            array[first], array[last] = array[last], array[first]
+    """
+    - Take last (rightmost) element as pivot
+    - Start with the first index as a potential pivot idx and try to find the correct index by iterating over the array
+    - While iterating move all elements smaller than or equal to pivot to the left of the pivot and move pivot idx to
+        the right one place at a time
+    - After one pass over the array (array[left .. right]), the pivot idx will be at the correct position for the pivot
+        element; perform one final swap to put the pivot element in its correct place
+    """
+    pivot = array[last]
+    pivot_idx = first
+    for idx in range(first, last):
+        if array[idx] <= pivot:
+            array[idx], array[pivot_idx] = array[pivot_idx], array[idx]
+            pivot_idx += 1
+    # here `pivot_idx` is the correct index for the pivot element and `last` is where the pivot element currently resides
+    # swap them to get pivot element in its corrrect place in the array and return the pivot idx
     array[pivot_idx], array[last] = array[last], array[pivot_idx]
-    return last
+    return pivot_idx
 
 
 if __name__ == '__main__':
