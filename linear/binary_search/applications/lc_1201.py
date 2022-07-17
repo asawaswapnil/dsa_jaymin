@@ -13,7 +13,7 @@ def nth_ugly_number(n: int, a: int, b: int, c: int) -> int:
 
     left, right = min(a, b, c), 2 * (10 ** 9)
     while left < right:
-        num = left + (right - left) // 2
+        num = (left + right) // 2
         if has_n_ugly_numbers_less_than(num):
             right = num
         else:
