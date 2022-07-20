@@ -16,23 +16,37 @@ def quick_select(array: List, selection: Selection, k: int) -> int:
     first, last = 0, len(array) - 1
     if selection == Selection.SMALLEST:
         k -= 1  # array indices start from 0
-        return _select_kth_smallest(array, first, last, k)
+        return _select_kth_smallest_iterative(array, first, last, k)
     else:
         k = len(array) - k  # kth largest is (n-k)th smallest
-        return _select_kth_smallest(array, first, last, k)
+        return _select_kth_smallest_iterative(array, first, last, k)
 
 
-def _select_kth_smallest(array: List, first: int, last: int, k: int) -> int:
+def _select_kth_smallest_recursive(array: List, first: int, last: int, k: int) -> int:
     """
     Find kth smallest element from the array
     """
     pivot_idx = _partition(array, first, last)
     if k < pivot_idx:
-        return _select_kth_smallest(array, first, pivot_idx - 1, k)
+        return _select_kth_smallest_recursive(array, first, pivot_idx - 1, k)
     elif k > pivot_idx:
-        return _select_kth_smallest(array, pivot_idx + 1, last, k)
+        return _select_kth_smallest_recursive(array, pivot_idx + 1, last, k)
     else:
         return array[pivot_idx]
+
+
+def _select_kth_smallest_iterative(array: List, first: int, last: int, k: int) -> int:
+    """
+    Find kth smallest element from the array
+    """
+    while first <= last:
+        pivot_idx = _partition(array, first, last)
+        if k < pivot_idx:
+            last = pivot_idx - 1
+        elif k > pivot_idx:
+            first = pivot_idx + 1
+        else:
+            return array[pivot_idx]
 
 
 def _partition(array: List, first: int, last: int) -> int:
