@@ -6,7 +6,7 @@ def search_insert_position(nums: List[int], target: int) -> int:
     Time: O(log n)
     Space: O(1)
     """
-    left, right = 0, len(nums)  # target can be to the right of aray so `right` is len(nums) instead of len(nums) - 1
+    left, right = 0, len(nums)  # target can be to the right of array so `right` is len(nums) instead of len(nums) - 1
 
     while left < right:
         mid = (left + right) // 2

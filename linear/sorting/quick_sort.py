@@ -25,7 +25,7 @@ def _partition(array: List, first: int, last: int):
     - Start with the first index as a potential pivot idx and try to find the correct index by iterating over the array
     - While iterating move all elements smaller than or equal to pivot to the left of the pivot and move pivot idx to
         the right one place at a time
-    - After one pass over the array (array[left .. right]), the pivot idx will be at the correct position for the pivot
+    - After one pass over the array (array[first .. last]), the pivot idx will be at the correct position for the pivot
         element; perform one final swap to put the pivot element in its correct place
     """
     pivot = array[last]
