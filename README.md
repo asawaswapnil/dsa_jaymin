@@ -73,3 +73,5 @@ Python implementations and examples of commonly used data structures and algorit
   - [Hit Counter](misc/hit_counter)
     - An implementation of a hit counter that keeps track of number of requests for different methods of a key-value store
     in past `n` seconds.
+  - [Word Search](misc/word_search)
+    - A memoized version of grid-based word search
