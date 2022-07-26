@@ -1,4 +1,4 @@
-from typing import List, Tuple, Union, Dict
+from typing import List, Tuple, Union
 
 
 def find_word_locations(grid: List[List[str]], word: str) -> List[Tuple]:
